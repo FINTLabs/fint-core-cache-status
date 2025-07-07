@@ -1,0 +1,21 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          fint:
+            authorization-grant-type: password
+            client-id:
+            client-secret:
+            scope: fint-client
+            provider: fint-provider
+        provider:
+          fint-provider:
+            token-uri: https://idp.felleskomponent.no/nidp/oauth/nam/token
+
+fint:
+  security:
+    oauth2:
+      client:
+        username:
+        password:
