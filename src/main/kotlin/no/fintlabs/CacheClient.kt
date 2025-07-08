@@ -9,7 +9,7 @@ import org.springframework.web.client.RestClient
 class CacheClient(
     private val restClient: RestClient
 ) {
-    fun getCacheStatus(baseUri: String): CacheResponse? =
+    fun getCache(baseUri: String): CacheResponse? =
          restClient.get()
             .uri("$baseUri/admin/cache/status")
             .retrieve()

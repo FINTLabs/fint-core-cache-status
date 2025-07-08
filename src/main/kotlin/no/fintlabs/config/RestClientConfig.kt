@@ -6,8 +6,6 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager
 import org.springframework.security.oauth2.client.web.client.OAuth2ClientHttpRequestInterceptor
 import org.springframework.web.client.RestClient
 
-
-
 @Configuration
 class RestClientConfig(
     private val oAuth2Manager: OAuth2AuthorizedClientManager
