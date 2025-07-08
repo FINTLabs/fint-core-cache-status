@@ -2,7 +2,7 @@ package no.fintlabs.model
 
 import com.fasterxml.jackson.annotation.JsonAnySetter
 
-data class CacheRequest(
+data class CacheStatus(
     @JsonAnySetter
     val orgs: Map<String, Map<String, StatusInfo>>,
 )
