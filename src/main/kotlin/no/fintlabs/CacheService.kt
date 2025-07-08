@@ -12,15 +12,21 @@ class CacheService(
 
     private val logger = LoggerFactory.getLogger(CacheService::class.java)
 
-    @PostConstruct
-    fun getCacheStatus(): CacheResponse? {
-        var response: CacheResponse?
+    private var cacheResponse: CacheResponse? = null
 
+    @PostConstruct
+    fun initCacheStatus() {
         try {
-            response = cacheClient.getCache("https://api.felleskomponent.no/utdanning/vurdering")
-            logger.info("CacheService GET Result: $response")
+            val response = cacheClient.getCache("https://api.felleskomponent.no/utdanning/vurdering")
+            cacheResponse = response
+            logger.info("initCacheStatus Result: $response")
         } catch (e: Exception) {
             logger.error("Error fetching cache status", e)
         }
     }
+
+    fun getRawCacheStatus(): CacheResponse? = cacheResponse
+
+
+
 }
