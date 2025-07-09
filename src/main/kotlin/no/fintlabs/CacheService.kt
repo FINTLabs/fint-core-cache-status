@@ -21,7 +21,7 @@ class CacheService(
 
     @PostConstruct
     fun getStatus() =
-        listOf("utdanning/vurdering").forEach {
+        listOf("utdanning/timeplan").forEach {
             cacheClient.getCache("https://api.felleskomponent.no/${it.replace("-", "/")}")
                 ?.let {
                     it.orgs.forEach { org, resourceMap ->
