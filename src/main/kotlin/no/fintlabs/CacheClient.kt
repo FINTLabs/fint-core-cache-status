@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.RestClientResponseException
 
-
 @Component
 class CacheClient(
     private val restClient: RestClient
