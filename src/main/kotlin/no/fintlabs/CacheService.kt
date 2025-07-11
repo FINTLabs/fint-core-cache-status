@@ -1,6 +1,8 @@
 package no.fintlabs
 
 import jakarta.annotation.PostConstruct
+import no.fintlabs.config.FintProperties
+import no.fintlabs.model.CacheStatus
 import org.springframework.stereotype.Service
 import java.time.Duration
 import java.time.Instant
@@ -17,25 +19,29 @@ private fun Duration.toStatusValue(): Int =
 
 @Service
 class CacheService(
-    private val cacheClient: CacheClient
+    private val cacheClient: CacheClient,
+    private val metricService: MetricService,
+    private val fintProperties: FintProperties
 ) {
-
     @PostConstruct
     fun getStatus() =
-        listOf("utdanning/timeplan").forEach {
-            cacheClient.getCache("https://api.felleskomponent.no/${it.replace("-", "/")}")
-                ?.let {
-                    it.orgs.forEach { org, resourceMap ->
-                        resourceMap.forEach { resource, resourceInfo ->
-                            if (resourceInfo.size > 0) {
-                                println(
-                                    "$org - $resource : ${
-                                        resourceInfo.lastUpdated.getStatusFromTime()
-                                    }"
-                                )
-                            }
-                        }
+        fintProperties.components
+            .mapNotNull { fetchStatus(it) }
+            .flatMap { it }
+            .forEach { metricService.updateCacheStatus(it) }
+
+    fun fetchStatus(component: String): List<CacheStatus>? =
+        cacheClient.getCache("https://api.felleskomponent.no/${component}")
+            ?.let { cache ->
+                cache.orgs.flatMap { (org, resourceMap) ->
+                    resourceMap.map { (resource, resourceInfo) ->
+                        CacheStatus(
+                            org = org,
+                            component = component,
+                            resource = resource,
+                            status = resourceInfo.lastUpdated.getStatusFromTime()
+                        )
                     }
                 }
-        }
+            }
 }

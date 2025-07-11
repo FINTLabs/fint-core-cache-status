@@ -14,8 +14,17 @@ spring:
             token-uri: https://idp.felleskomponent.no/nidp/oauth/nam/token
 
 fint:
+  components:
+    - utdanning/vurdering
+    - utdanning/elev
   security:
     oauth2:
       client:
         username:
         password:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
