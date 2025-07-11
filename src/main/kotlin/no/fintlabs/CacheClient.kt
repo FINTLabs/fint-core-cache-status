@@ -1,14 +1,14 @@
 package no.fintlabs
 
+import no.fintlabs.client.CacheFetcher
 import no.fintlabs.model.CacheResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import org.springframework.web.client.RestClient
 import org.springframework.web.client.RestClientResponseException
 
 @Component
 class CacheClient(
-    private val restClient: RestClient
+    private val fetcher: CacheFetcher
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -18,10 +18,7 @@ class CacheClient(
 
     fun getCache(baseUri: String): CacheResponse? =
         runCatching {
-            restClient.get()
-                .uri("$baseUri/admin/cache/status")
-                .retrieve()
-                .body(CacheResponse::class.java)
+            fetcher.fetchCacheStatus("$baseUri/admin/cache/status")
         }.onFailure(::logFetchError)
             .getOrNull()
 }
