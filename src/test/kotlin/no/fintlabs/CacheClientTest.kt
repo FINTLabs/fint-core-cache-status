@@ -1,12 +1,13 @@
 package no.fintlabs
 
 import no.fintlabs.client.CacheFetcher
+import no.fintlabs.model.CacheResponse
+import no.fintlabs.model.ResourceInfo
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import java.time.Instant
-import no.fintlabs.model.*
-import org.mockito.kotlin.any
 import kotlin.test.assertIs
 
 class CacheClientTest {
