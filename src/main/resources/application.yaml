@@ -23,6 +23,9 @@ fint:
     - arkiv/samferdsel
     - arkiv/kulturminnevern
 
+    - okonomi/faktura
+    - okonomi/kodeverk
+
     - utdanning/elev
     - utdanning/timeplan
     - utdanning/kodeverk
