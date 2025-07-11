@@ -15,8 +15,25 @@ spring:
 
 fint:
   components:
-    - utdanning/vurdering
+    - felles/kodeverk
+
+    - arkiv/noark
+    - arkiv/personal
+    - arkiv/kodeverk
+    - arkiv/samferdsel
+    - arkiv/kulturminnevern
+
     - utdanning/elev
+    - utdanning/timeplan
+    - utdanning/kodeverk
+    - utdanning/vurdering
+    - utdanning/utdanningsprogram
+
+    - administrasjon/fullmakt
+    - administrasjon/kodeverk
+    - administrasjon/personal
+    - administrasjon/organisasjon
+
   security:
     oauth2:
       client:

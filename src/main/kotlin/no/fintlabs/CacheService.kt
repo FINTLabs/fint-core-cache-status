@@ -3,6 +3,7 @@ package no.fintlabs
 import jakarta.annotation.PostConstruct
 import no.fintlabs.config.FintProperties
 import no.fintlabs.model.CacheStatus
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import java.time.Duration
 import java.time.Instant
@@ -23,7 +24,7 @@ class CacheService(
     private val metricService: MetricService,
     private val fintProperties: FintProperties
 ) {
-    @PostConstruct
+    @Scheduled(fixedDelay = 60000, initialDelay = 1000)
     fun getStatus() =
         fintProperties.components
             .mapNotNull { fetchStatus(it) }
