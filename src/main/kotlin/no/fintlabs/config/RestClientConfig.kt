@@ -17,7 +17,7 @@ class RestClientConfig(
             .build()
 
     private fun oauth2RequestInterceptor() =
-        OAuth2ClientHttpRequestInterceptor(oAuth2Manager).apply{
+        OAuth2ClientHttpRequestInterceptor(oAuth2Manager).apply {
             setClientRegistrationIdResolver { "fint" }
         }
 }
