@@ -1,0 +1,14 @@
+apiVersion: fintlabs.no/v1alpha1
+kind: Application
+metadata:
+  name: fint-core-cache-status
+  namespace: fint-core
+spec:
+  port: 8080
+  orgId: fintlabs.no
+  image: ghcr.io/fintlabs/fint-core-cache-status:latest
+  observability:
+    metrics:
+      enabled: true
+      port: "8080"
+      path: /actuator/prometheus
