@@ -1,6 +1,5 @@
 package no.fintlabs
 
-import jakarta.annotation.PostConstruct
 import no.fintlabs.config.FintProperties
 import no.fintlabs.model.CacheStatus
 import org.springframework.scheduling.annotation.Scheduled
